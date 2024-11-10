@@ -1,3 +1,5 @@
+# https://everybody.codes/event/2024/quests/1
+
 import std/sequtils
 
 func letterWeight(ch: char): int =
