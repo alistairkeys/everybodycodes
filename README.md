@@ -10,7 +10,7 @@ The answers are in [Nim](https://nim-lang.org), so make sure you have it
 installed (there are instructions on the Nim website).
 
 Each question is a simple .nim file without dependencies, so you can execute
-them by changing to the relevant directory and using `nim c -r question1.nim`
+them by changing to the relevant directory and using `nim c -r quest1.nim`
 (for example).
 
 ## Why are the input files not provided?
