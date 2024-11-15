@@ -1,6 +1,6 @@
 # https://everybody.codes/event/2024/quests/2
 
-import std/[strutils, unicode]
+import std/[math, strutils, sequtils, unicode]
 
 type
   Stuff = object
@@ -30,15 +30,46 @@ func part2(stuff: Stuff): int =
             s.incl n.byte
           inc idx
 
+  let wordsBothDirections = stuff.words & stuff.words.mapIt(it.reversed)
   for line in stuff.input:
     var s: set[byte]
-    for w in stuff.words:
+    for w in wordsBothDirections:
       countSymbols(line, w)
-      countSymbols(line, w.reversed)
     result += s.card
 
 func part3(stuff: Stuff): int =
-  0 # TODO: implement this
+  template countSymbols(line, word: string, lineNumber: int) =
+    block:
+      let lineLength = stuff.input[0].len
+      var idx = 0
+      while idx >= 0:
+        idx = line.find(word, idx)
+        if idx >= 0:
+          var offset = lineNumber * lineLength
+          for n in idx ..< idx + word.len:
+            s.incl(offset.uint16 + floorMod((offset.uint16 + n.uint16), lineLength.uint16))
+          inc idx
+
+  let wordsBothDirections = stuff.words & stuff.words.mapIt(it.reversed)
+
+  var s: set[uint16]
+  for lineNumber, line in stuff.input:
+    for w in wordsBothDirections:
+      countSymbols(line & line[0..w.high - 1], w, lineNumber)
+
+  for w in wordsBothDirections:
+   for x, _ in stuff.input[0]:
+      for y in 0 .. stuff.input.high - w.high:
+        var foundIt = true
+        for idx, ch in w:
+          if stuff.input[y + idx][x] != ch:
+            foundIt = false
+            break
+        if foundIt:
+          for idx, ch in w:
+            s.incl(((y + idx) * stuff.input[0].len + x).uint16)
+    
+  result = s.card
 
 when isMainModule:
   echo part1(Stuff(
@@ -68,4 +99,4 @@ when isMainModule:
     words: "THE,OWE,MES,ROD,RODEO".split(",")
   )) # example, answer is 10
 
-  # echo part3(parseInputFile("../input/everybody_codes_e2024_q2_p3.txt"))
+  echo part3(parseInputFile("../input/everybody_codes_e2024_q2_p3.txt"))

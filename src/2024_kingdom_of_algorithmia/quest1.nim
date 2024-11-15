@@ -3,11 +3,11 @@
 import std/sequtils
 
 func letterWeight(ch: char): int =
-    case ch
-      of 'B': 1
-      of 'C': 3
-      of 'D': 5
-      else: 0
+  case ch
+    of 'B': 1
+    of 'C': 3
+    of 'D': 5
+    else: 0
 
 func part1(input: string): int =
   for ch in input:
