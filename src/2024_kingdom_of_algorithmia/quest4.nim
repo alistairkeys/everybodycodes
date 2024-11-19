@@ -13,6 +13,6 @@ func part2(sizes: openArray[int]): int =
   part1(sizes)
 
 echo part1([3,4,7,8]) # example, output is 10
-echo part1(parseInputFile "../input/everybody_codes_e2024_q04_p1.txt") # 82
+echo part1(parseInputFile "../input/everybody_codes_e2024_q04_p1.txt")
 
 echo part2(parseInputFile "../input/everybody_codes_e2024_q04_p2.txt")
