@@ -57,6 +57,9 @@ func part1(inputMap: HeightMap): int =
           
   result = foldl(maps[mapIdx].data, a + b)
 
+func part2(inputMap: HeightMap): int =
+  part1(inputMap)
+
 var map = populate([
              "..........",
              "..###.##..",
@@ -67,3 +70,5 @@ var map = populate([
              ".........."])
 echo part1(map) # example, output is 35
 echo part1(parseInputFile("../input/everybody_codes_e2024_q03_p1.txt"))
+
+echo part2(parseInputFile("../input/everybody_codes_e2024_q03_p2.txt"))
